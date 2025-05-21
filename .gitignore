@@ -1,0 +1,7 @@
+__pycache__
+.venv
+certs
+compiled_pyc
+patronobuf.py
+src
+dist
