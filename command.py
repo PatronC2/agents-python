@@ -3,6 +3,7 @@ import platform
 import logging
 import patronobuf as pb
 from common import write_delimited, read_delimited
+from socks import handle_socks_command
 
 logger = logging.getLogger("patron_client")
 
@@ -35,9 +36,9 @@ def handle_command_loop(conn, agent_id):
         logger.debug(f"CommandType: {cmd.commandtype}, Command: {cmd.command}")
 
         if cmd.commandtype == "socks":
-            logger.warning("SOCKS5 not implemented in Python client")
+            handle_socks_command(conn, cmd, logger)
             continue
-
+        
         status = execute_command_request(cmd)
 
         if status.result == "2":
